@@ -1,5 +1,5 @@
 import ThreadCard from '@/components/cards/ThreadCard';
-import { fetchposts } from '@/lib/actions/thread.actions';
+import { fetchPosts } from '@/lib/actions/thread.actions';
 import { fetchUser } from '@/lib/actions/user.actions';
 import Pagination from '@/components/shared/Pagination';
 
@@ -21,7 +21,7 @@ export default async function Home({
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect('/onboarding');
 
-  const result = await fetchposts(
+  const result = await fetchPosts(
     searchParams.page ? +searchParams.page : 1,
     30
   );
