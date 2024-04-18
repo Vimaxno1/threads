@@ -1,6 +1,7 @@
 import ThreadCard from '@/components/cards/ThreadCard';
 import { fetchposts } from '@/lib/actions/thread.actions';
 import { fetchUser } from '@/lib/actions/user.actions';
+import Pagination from '@/components/shared/Pagination';
 
 import { currentUser } from '@clerk/nextjs';
 import { UserButton } from '@clerk/nextjs';
@@ -38,7 +39,7 @@ export default async function Home({
               <ThreadCard
                 key={post._id}
                 id={post._id}
-                currentUserId={user?.id || ' '}
+                currentUserId={user.id}
                 parentId={post.parentId}
                 content={post.text}
                 author={post.author}
@@ -50,6 +51,11 @@ export default async function Home({
           </>
         )}
       </section>
+      <Pagination
+        path="/"
+        pageNumber={searchParams?.page ? +searchParams.page : 1}
+        isNext={result.isNext}
+      />
     </>
   );
 }
